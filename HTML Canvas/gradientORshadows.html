@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background-image: linear-gradient(120deg,rgb(150, 174, 150), rgb(140, 140, 247)) ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        h2 { 
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #button {
+         border: none;   
+        }
+        button {
+            padding: 5px 10px;
+            margin: 10px 5px;
+            border: none;
+        }
+        img {
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Let's Make Shadows</h2>
+    <img id="img" src="pic.jpeg" height="200x" width="250px">
+    <div id="buttons">
+        <button onclick="draw('repeat')">Reset</button>
+        <button onclick="draw('repeat-x')">Reset-x</button>
+        <button onclick="draw('repeat-y')">Reset-y</button>
+        <button onclick="draw('no-repeat')">No-Reset</button>
+    </div>
+    <canvas id="myCanvas" height="600" width="900" style="border: 1px solid rebeccapurple;"> </canvas>
+    <script>
+    // STYLE 1: Uncomment whole function
+    function draw(direction) {
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var img = document.getElementById("img");
+
+            var pattern;
+            if (direction === 'repeat-x') {
+                pattern = ctx.createPattern(img, 'repeat-x');
+                ctx.fillStyle = pattern;
+                ctx.fillRect(0, 0, canvas.width, img.height);
+            } else if (direction === 'repeat-y') {
+                pattern = ctx.createPattern(img, 'repeat-y');
+                ctx.fillStyle = pattern;
+                ctx.fillRect(0, 0, img.width, canvas.height);
+            } else if (direction === 'repeat') {
+                pattern = ctx.createPattern(img, 'repeat');
+                ctx.fillStyle = pattern;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.drawImage(img, 0, 0);
+            }
+        }
+
+    // STYLE 2: NORMAL DESIGN WITHOUT FUNCTION
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var gradient = ctx.createLinearGradient(90, 150, 170, 50);
+        gradient.addColorStop("0", "red");
+        //_____________________________________ uncomment with above 4 lines as well
+        // x and y axis shadow
+    
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 10;
+        ctx.shadowOffsetY = 10;
+        ctx.shadowColor = "red";
+        ctx.styleFill = "grey";
+        ctx.fillRect(200, 170, 500, 280);
+        //_____________________________________
+        //  multi-color borders
+
+        gradient.addColorStop("0.5", "blue");
+        gradient.addColorStop("1.0", "orange");
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 5;
+        ctx.strokeRect(250, 200, 400, 200);
+
+    </script>
+</body>
+</html>

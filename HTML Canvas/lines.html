@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lines</title>
+</head>
+<style>
+    #body {
+        background-image: linear-gradient(rgb(227, 154, 166), rgb(221, 221, 49));
+    }
+    h2 {
+        font-size: 30px;
+        text-align: center;
+        margin: 20px 0px;
+    }
+</style>
+<body id="body">
+    <h2>Lines and Its Joining</h2>
+    <canvas id="canvas" height="800"; width="1500px"; style=" border:2px solid black; margin: 30px 250px;" > </canvas>
+    <script>
+        // uncomment either lines to see it or curver to see them separately
+        // LINES
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.lineJoin = "round"; // also can be square, butt, mitter or round
+        ctx.lineCap = "round";
+        // ctx.miterLimit = 5; // in case you use miter
+        ctx.lineWidth = 30;
+        ctx.moveTo(400, 20);
+        ctx.lineTo(900, 150);
+        ctx.lineTo(400, 300);
+        ctx.stroke();
+        
+        // Curves
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.moveTo(530, 430);
+        ctx.quadraticCurveTo(200, 700, 450, 470); // quadraticCurveTo() uncomment one of this method
+        ctx.bezierCurveTo(100, 600, 300, 150, 550, 570); // bezierCurveTo()
+        ctx.arc(700, 300, 100, 0, 2*Math.PI); // arc()
+        ctx.stroke();
+        
+        // arcTo();
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.moveTo(20, 20);
+        ctx.lineTo(10, 20);
+        ctx.arcTo(150, 20, 150, 50, 50); // arcTo()
+        ctx.lineTo(150, 170);
+        ctx.stroke();
+
+        // isPointinPath ===> condition x or y {like in ctx.rect(x, y) or not }
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.rect(750, 450, 400, 200);
+        if ( ctx.isPointInPath(600, 1050) ) {
+            ctx.stroke();
+        } else {
+            ctx.fillStyle = "purple";
+            ctx.fill();
+        }
+    </script>
+</body>
+</html>
